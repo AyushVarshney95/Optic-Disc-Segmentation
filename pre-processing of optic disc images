@@ -1,3 +1,8 @@
+################################################################################
+
+
+# Import the necessary packages
+
 import tensorflow
 import os
 import pandas as pd
@@ -15,7 +20,7 @@ height = 512
 
 
 
-# Input the Training Data and store it
+# Input the Training X DATA
 Training_input_data = 'C:/Ayush/image reconstruction/unet/OD seg/A. Segmentation/A. Segmentation/1. Original Images/a. Training Set/'
 training_input_data = [x for x in sorted(os.listdir(Training_input_data))]
 print(len(training_input_data))
@@ -35,6 +40,9 @@ x_train_input_data = x_train_input_data.reshape(x_train_input_data.shape[0],widt
 print(x_train_input_data.shape)
 
 
+
+
+# Input the Testing X DATA
 Testing_input_data = 'C:/Ayush/image reconstruction/unet/OD seg/A. Segmentation/A. Segmentation/1. Original Images/b. Testing Set/'
 testing_input_data = [x for x in sorted(os.listdir(Testing_input_data))]
 print(len(testing_input_data))
@@ -55,6 +63,9 @@ print(x_test_input_data.shape)
 print(x_test_input_data[0])
 
 
+
+
+# Input the Training Y DATA
 Training_output_data = 'C:/Ayush/image reconstruction/unet/OD seg/A. Segmentation/A. Segmentation/2. All Segmentation Groundtruths/a. Training Set/5. Optic Disc/'
 training_output_data = [x for x in sorted(os.listdir(Training_output_data))]
 print(len(training_output_data))
@@ -76,6 +87,8 @@ print(x_train_output_data.shape)
 
 
 
+
+# Input the Testing Y DATA
 Testing_output_data = 'C:/Ayush/image reconstruction/unet/OD seg/A. Segmentation/A. Segmentation/2. All Segmentation Groundtruths/b. Testing Set/5. Optic Disc/'
 testing_output_data = [x for x in sorted(os.listdir(Testing_output_data))]
 print(len(testing_output_data))
