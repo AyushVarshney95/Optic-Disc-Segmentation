@@ -1,0 +1,9 @@
+
+# checking the result
+# using the U-net trained Model to show the prediction for new images
+#
+
+fig, ax = plt.subplots(1,3,figsize=(12,6))
+ax[0].imshow(x_test_input_data[0,:,:,:])
+ax[1].imshow(x_test_output_data[0,:,:,:])
+ax[2].imshow(y_hat[0,:,:,:])
