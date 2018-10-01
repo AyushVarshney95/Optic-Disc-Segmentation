@@ -1,3 +1,8 @@
+##################################################################################
+# U-NET MODEL 
+
+
+
 inputs = Input( (width,height,1))
 conv1 = Conv2D(32, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_uniform')(inputs)
 conv1 = Dropout(0.5)(conv1)
@@ -11,5 +16,8 @@ conv3 = Dropout(0.3)(conv3)
 conv4 = Conv2D(32, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_uniform')(conv3)
 conv4 = Dropout(0.3)(conv4)
 conv5 = Conv2D(1, 1, activation = 'sigmoid')(conv4)
-model1 = Model(input = inputs, output = conv5)
-model1.summary()
+model = Model(input = inputs, output = conv5)
+model.summary()
+
+
+############################################################################################################
