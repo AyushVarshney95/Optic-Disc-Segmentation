@@ -1,0 +1,97 @@
+import tensorflow
+import os
+import pandas as pd
+import numpy as np
+import cv2
+import matplotlib.pyplot as plt
+%matplotlib inline
+from keras.models import Model
+from keras.layers import *
+from keras.layers.merge import *
+import keras
+from keras.optimizers import Adam
+width = 512
+height = 512
+
+
+
+# Input the Training Data and store it
+Training_input_data = 'C:/Ayush/image reconstruction/unet/OD seg/A. Segmentation/A. Segmentation/1. Original Images/a. Training Set/'
+training_input_data = [x for x in sorted(os.listdir(Training_input_data))]
+print(len(training_input_data))
+print(training_input_data)
+x_train_input_data = np.empty((len(training_input_data),width,height),dtype = 'float32')
+for i,name  in enumerate(training_input_data):
+    im = cv2.imread(Training_input_data + name,cv2.COLOR_BGR2GRAY).astype('int16').astype('float32')/255.
+    im = im[:,:,2]
+    im = cv2.resize(im,dsize = (width,height),interpolation = cv2.INTER_NEAREST)
+    x_train_input_data[i] = im
+    
+print(x_train_input_data.shape)
+fig, ax = plt.subplots(1,2,figsize = (8,4))
+ax[0].imshow(x_train_input_data[0])
+ax[1].imshow(x_train_input_data[1],cmap='gray')
+x_train_input_data = x_train_input_data.reshape(x_train_input_data.shape[0],width,height,1)
+print(x_train_input_data.shape)
+
+
+Testing_input_data = 'C:/Ayush/image reconstruction/unet/OD seg/A. Segmentation/A. Segmentation/1. Original Images/b. Testing Set/'
+testing_input_data = [x for x in sorted(os.listdir(Testing_input_data))]
+print(len(testing_input_data))
+print(testing_input_data)
+x_test_input_data = np.empty((len(testing_input_data),width,height),dtype = 'float32')
+for i,name  in enumerate(testing_input_data):
+    im = cv2.imread(Testing_input_data + name,cv2.COLOR_BGR2GRAY).astype('int16').astype('float32')/255.
+    img = im[:,:,2]
+    img = cv2.resize(img,dsize = (width,height),interpolation = cv2.INTER_NEAREST)
+    x_test_input_data[i] = img
+    
+print(x_test_input_data.shape)
+fig, ax = plt.subplots(1,2,figsize = (8,4))
+ax[0].imshow(x_test_input_data[0])
+ax[1].imshow(x_test_input_data[1],cmap = 'gray')
+x_test_input_data = x_test_input_data.reshape(x_test_input_data.shape[0],width,height,1)
+print(x_test_input_data.shape)
+print(x_test_input_data[0])
+
+
+Training_output_data = 'C:/Ayush/image reconstruction/unet/OD seg/A. Segmentation/A. Segmentation/2. All Segmentation Groundtruths/a. Training Set/5. Optic Disc/'
+training_output_data = [x for x in sorted(os.listdir(Training_output_data))]
+print(len(training_output_data))
+print(training_output_data)
+x_train_output_data = np.empty((len(training_output_data),width,height),dtype = 'float32')
+for i,name  in enumerate(training_output_data):
+    im = cv2.imread(Training_output_data + name).astype('int16').astype('float32')/255.
+    img = im[:,:,2]
+    img = cv2.resize(img,dsize = (width,height),interpolation = cv2.INTER_NEAREST)
+    x_train_output_data[i] = img
+    
+print(x_train_output_data.shape)
+fig, ax = plt.subplots(1,2,figsize = (8,4))
+ax[0].imshow(x_train_output_data[0])
+ax[1].imshow(x_train_output_data[1],cmap='gray')
+x_train_output_data = x_train_output_data.reshape(x_train_output_data.shape[0],width,height,1)
+print(x_train_output_data.shape)
+
+
+
+
+Testing_output_data = 'C:/Ayush/image reconstruction/unet/OD seg/A. Segmentation/A. Segmentation/2. All Segmentation Groundtruths/b. Testing Set/5. Optic Disc/'
+testing_output_data = [x for x in sorted(os.listdir(Testing_output_data))]
+print(len(testing_output_data))
+print(testing_output_data)
+x_test_output_data = np.empty((len(testing_output_data),width,height),dtype = 'float32')
+for i,name  in enumerate(testing_output_data):
+    im = cv2.imread(Testing_output_data + name).astype('int16').astype('float32')/255.
+    img = im[:,:,2]
+    img = cv2.resize(img,dsize = (width,height),interpolation = cv2.INTER_NEAREST)
+    x_test_output_data[i] = img
+    
+print(x_test_output_data.shape)
+fig, ax = plt.subplots(1,2,figsize = (8,4))
+ax[0].imshow(x_test_output_data[0])
+ax[1].imshow(x_test_output_data[1],cmap='gray')
+x_test_output_data = x_test_output_data.reshape(x_test_output_data.shape[0],width,height,1)
+print(x_test_output_data.shape)
+
+
