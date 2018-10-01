@@ -1,0 +1,14 @@
+model1.compile(optimizer = keras.optimizers.Nadam(), loss = 'binary_crossentropy',metrics=['accuracy'])
+model1.fit(x_train_input_data,x_train_output_data,
+          batch_size = 1,
+          epochs = 10,
+          verbose = 1,
+          validation_data = (x_test_input_data,x_test_output_data))
+          
+   
+# checking the result
+
+fig, ax = plt.subplots(1,3,figsize=(12,6))
+ax[0].imshow(x_test_input_data[2,:,:,0])
+ax[1].imshow(x_test_output_data[2,:,:,0])
+ax[2].imshow(y_hat[2,:,:,0])
